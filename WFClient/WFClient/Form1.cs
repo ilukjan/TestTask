@@ -14,6 +14,7 @@ namespace WFClient
         public Form1()
         {
             InitializeComponent();
+
             this.ddlParseURL.DataSource = ParsingExamples.URLExamples;
         }
 
