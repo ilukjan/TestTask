@@ -1,0 +1,26 @@
+﻿[29.09.2021] v.1.0.5
++ Display of Parsed instances
+
+[29.09.2021] v.1.0.4
++ Display of HTML clear text
+
+[28.09.2021] v.1.0.3
++ UI controls (for searching / displaying / status)
++ Pullenti parser
+
+[26.09.2021] v.1.0.2
+- Server side abstract class
++ Service client from ServiceModel
+
+[26.09.2021] v.1.0.1
+* Redo interface to abstract class
+
+[22.09.2021] v.1.0.0
++ Common interface for Server side:
+	ParseURL
+	SearchInArticles
+	SearchInInstances
++ KLService	(inherits Server interface)
++ Basic UI
+	txtURL
+	btnParse
