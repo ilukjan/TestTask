@@ -1,0 +1,4 @@
+1. Realize searching in parsed instances
+2. Realize searching in clear text
+3. Move api host port in config (atm hardcoded)
+4. Remove max 500 pages in Abot config
