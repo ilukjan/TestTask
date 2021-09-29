@@ -1,0 +1,61 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31702.278
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WFClient", "WFClient\WFClient.csproj", "{792CAE06-C7B0-408D-B9B3-13A46182592C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WFServerWebAPI", "WFServerWebAPI\WFServerWebAPI\WFServerWebAPI.csproj", "{4389B305-B381-4B50-B1A8-BBB5259A0524}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WFServerWebAPI.ServiceInterface", "WFServerWebAPI\WFServerWebAPI.ServiceInterface\WFServerWebAPI.ServiceInterface.csproj", "{801A0F89-D5F6-49A6-BCEA-6624388C98A4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebCrawler", "WebCrawler\WebCrawler.csproj", "{C236DDC0-AA77-4425-AAA4-F5093C605EBD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBSaver", "DBSaver\DBSaver.csproj", "{C6D1DAAA-D121-4DE2-B9EC-06F3D2455677}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedData", "SharedData\SharedData.csproj", "{AD014E14-FF28-43B9-B1EA-7A05EEE1CC50}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebParser", "WebParser\WebParser.csproj", "{FD65B4C9-BB3C-4114-A533-3D3357D7B0B5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{792CAE06-C7B0-408D-B9B3-13A46182592C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{792CAE06-C7B0-408D-B9B3-13A46182592C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{792CAE06-C7B0-408D-B9B3-13A46182592C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{792CAE06-C7B0-408D-B9B3-13A46182592C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4389B305-B381-4B50-B1A8-BBB5259A0524}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4389B305-B381-4B50-B1A8-BBB5259A0524}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4389B305-B381-4B50-B1A8-BBB5259A0524}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4389B305-B381-4B50-B1A8-BBB5259A0524}.Release|Any CPU.Build.0 = Release|Any CPU
+		{801A0F89-D5F6-49A6-BCEA-6624388C98A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{801A0F89-D5F6-49A6-BCEA-6624388C98A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{801A0F89-D5F6-49A6-BCEA-6624388C98A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{801A0F89-D5F6-49A6-BCEA-6624388C98A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C236DDC0-AA77-4425-AAA4-F5093C605EBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C236DDC0-AA77-4425-AAA4-F5093C605EBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C236DDC0-AA77-4425-AAA4-F5093C605EBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C236DDC0-AA77-4425-AAA4-F5093C605EBD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6D1DAAA-D121-4DE2-B9EC-06F3D2455677}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6D1DAAA-D121-4DE2-B9EC-06F3D2455677}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6D1DAAA-D121-4DE2-B9EC-06F3D2455677}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6D1DAAA-D121-4DE2-B9EC-06F3D2455677}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD014E14-FF28-43B9-B1EA-7A05EEE1CC50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD014E14-FF28-43B9-B1EA-7A05EEE1CC50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD014E14-FF28-43B9-B1EA-7A05EEE1CC50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD014E14-FF28-43B9-B1EA-7A05EEE1CC50}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD65B4C9-BB3C-4114-A533-3D3357D7B0B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD65B4C9-BB3C-4114-A533-3D3357D7B0B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD65B4C9-BB3C-4114-A533-3D3357D7B0B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD65B4C9-BB3C-4114-A533-3D3357D7B0B5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {42307ED8-1246-44AA-A024-CDE573DC2A27}
+	EndGlobalSection
+EndGlobal
