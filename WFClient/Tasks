@@ -1,6 +1,7 @@
 1. Realize searching in parsed instances
 2. Realize searching in clear text
 3. Move api host port in config (atm hardcoded)
-4. Remove max 500 pages in Abot config
-5. [In progress] Rewrite the recursive polling with Hangfire. Read Hangfire docu. Move poll to separated request (2h)
+4. [X] Remove max 500 pages in Abot config
+5. [X] Rewrite the recursive polling with Hangfire. Read Hangfire docu. Move poll to separated request (2h)
 6. Rename the Parser to InstanceExtractor and move it to the server side (1h)
+7. Fix action void not started in a minute RecurringJob.AddOrUpdate(() => PollServerForCrawledData(), Cron.Minutely);
