@@ -26,7 +26,7 @@ namespace WebCrawler.Abot
             {
                 MaxConcurrentThreads = 10,
                 MinCrawlDelayPerDomainMilliSeconds = 300,
-                MaxPagesToCrawl = 500
+                //MaxPagesToCrawl = 500
             };
 
             var crawler = new PoliteWebCrawler(config);
