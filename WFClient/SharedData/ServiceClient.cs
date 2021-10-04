@@ -1,13 +1,13 @@
-﻿using ServiceStack;
-using SharedData;
+﻿using Hangfire;
+using Hangfire.PostgreSql;
+using Hangfire.SqlServer;
+using ServiceStack;
 using SharedData.InternalDefinition;
 using SharedData.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using WFServerWebAPI.ServiceModel.Encoder;
 
 namespace WFServerWebAPI.ServiceModel
@@ -17,11 +17,15 @@ namespace WFServerWebAPI.ServiceModel
         public WebAPIServiceClient(string url = "http://localhost:50012/")
         {
             Client = new JsonServiceClient(url);
+            PollTimer.Elapsed += PollTimer_Elapsed;
         }
 
 
         JsonServiceClient Client = null;
-
+        AutoResetEvent ARE = new AutoResetEvent(false);
+        PollCrawlStatusResponse CrawlResponse= new PollCrawlStatusResponse() { ResultState = SharedData.Helpers.ERequestResult.InProcess };
+        System.Timers.Timer PollTimer = new System.Timers.Timer(5 * 1000);
+        object Locker = new object();
 
         public bool CheckOnline(string name = "client")
         {
@@ -42,35 +46,37 @@ namespace WFServerWebAPI.ServiceModel
             }            
         }
 
-        public bool ParseURL(string parsingUrl, IProgress<string> progress, out List<string> parsedPages)
+        public bool CrawlURL(string parsingUrl, IProgress<string> progress, out List<string> parsedPages)
         {
             try
             {
                 parsedPages = new List<string>();
-                progress.Report("Perform parsing.....");
+                progress.Report("Perform crawling.....");
 
                 var urlEnc = EncodeHelper.Encode(parsingUrl);
-                var request = new ParseURLRequest() { ParsingURL = urlEnc };
+                var request = new CrawlURLRequest() { ParsingURL = urlEnc };
 
+                // start the crawler
                 var response = Client.Post(request);
 
                 if (response != null)
                 {
-                    if (response.ResultState == SharedData.Helpers.ERequestResult.Failed)
-                        return false;
+                    var pgConnString = @"Server=localhost;Port=5432;User Id=postgres;Password=sql;Database=postgres;";
+                    JobStorage.Current = new PostgreSqlStorage(pgConnString);
 
-                    if (response.ResultState == SharedData.Helpers.ERequestResult.Succeed)
-                    {
-                        parsedPages = response.ParsedPages.Select(x => x.ClearText).ToList();
-                        return SaveParsedToDB(response.ParsedPages, progress);
-                    }
 
-                    // polling
-                    if (response.ResultState == SharedData.Helpers.ERequestResult.InProcess)
-                    {
-                        Thread.Sleep(5 * 1000);
-                        return ParseURL(parsingUrl, progress, out parsedPages);
-                    }
+                    PollTimer.Start();
+
+                    // ToDo: Minute is too long for polling
+                    //RecurringJob.AddOrUpdate(() => PollServerForCrawledData(), Cron.Minutely);
+                    
+                    ARE.WaitOne();
+
+                    PollTimer.Stop();
+
+                    // save to db
+                    parsedPages = CrawlResponse.ParsedPages.Select(x => x.ClearText).ToList();
+                    return SaveParsedToDB(response.ParsedPages, progress);
                 }
 
                 return false;
@@ -107,10 +113,37 @@ namespace WFServerWebAPI.ServiceModel
             }
         }
 
-
-
         public void Dispose()
         {
+        }
+
+
+
+        public void PollServerForCrawledData()
+        {
+            var request = new PollCrawlStatusRequest();
+            var response = Client.Post(request);
+
+            if (response != null)
+            {
+                CrawlResponse = response;
+
+                if (response.ResultState == SharedData.Helpers.ERequestResult.Failed ||
+                    response.ResultState == SharedData.Helpers.ERequestResult.Succeed)
+                    ARE.Set();
+            }
+        }
+
+        void PollTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            if (Monitor.TryEnter(Locker))
+            {
+                // actually checks previous state
+                if (CrawlResponse.ResultState == SharedData.Helpers.ERequestResult.InProcess)
+                    PollServerForCrawledData();
+
+                Monitor.Exit(Locker);
+            }
         }
     }
 }

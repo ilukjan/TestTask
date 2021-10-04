@@ -69,7 +69,7 @@ namespace WFClient
                 if (!isOnline)
                     return false;
 
-                return client.ParseURL(url, progress, out parsedPageText);
+                return client.CrawlURL(url, progress, out parsedPageText);
             }            
         }
         List<string> ExtractInstances(List<string> pageText)

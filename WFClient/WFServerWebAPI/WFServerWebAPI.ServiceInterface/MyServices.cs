@@ -17,15 +17,15 @@ namespace WFServerWebAPI.ServiceInterface
     {
         public MyServices()
         {
-            
+
         }
 
         public object Any(HelloRequest request)
-        {            
+        {
             return new HelloResponse { Result = $"Hello, {request.Name}!" };
         }
 
-        public object Any(ParseURLRequest request)
+        public object Any(CrawlURLRequest request)
         {
             var urlDec = EncodeHelper.Decode(request.ParsingURL);
             var parsedpages = new List<DBData>();
@@ -38,7 +38,17 @@ namespace WFServerWebAPI.ServiceInterface
                     return ExecutionMonitor.ExecutionResult;
             }
 
-            return new ParseURLResponse { ResultState = ERequestResult.InProcess, ParsedPages = parsedpages };
+            return new CrawlURLResponse { ResultState = ERequestResult.InProcess, ParsedPages = parsedpages };
+        }
+
+        public object Any(PollCrawlStatusRequest request)
+        {
+            var parsedpages = new List<DBData>();
+
+            if (ExecutionMonitor.IsFinished)
+                return ExecutionMonitor.ExecutionResult;
+
+            return new PollCrawlStatusResponse { ResultState = ERequestResult.InProcess, ParsedPages = parsedpages };
         }
 
         public object Any(SaveDBRequest request)
