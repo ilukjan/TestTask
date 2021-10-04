@@ -2,5 +2,5 @@
 2. Realize searching in clear text
 3. Move api host port in config (atm hardcoded)
 4. Remove max 500 pages in Abot config
-5. [In progress] Rewrite the recursive polling with Hangfire. Read Hangfire docu (2h)
+5. [In progress] Rewrite the recursive polling with Hangfire. Read Hangfire docu. Move poll to separated request (2h)
 6. Rename the Parser to InstanceExtractor and move it to the server side (1h)
